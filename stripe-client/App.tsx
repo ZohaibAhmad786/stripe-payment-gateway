@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import RootScreen from './src/screens'
+import AddressElement from './src/screens/address-element'
 import GooglePaymentScreen from './src/screens/GooglePay'
 import StripPayment from './src/screens/payment-gatways/stripe'
 import PaymentSheetScreen from './src/screens/Paymentsheet'
@@ -19,6 +20,7 @@ const App = () => {
             <Stack.Screen name="custome-payment-element" component={PaymentSheetScreen} />
             <Stack.Screen name="google-pay" component={GooglePaymentScreen} />
             <Stack.Screen name="card-element" component={StripPayment} />
+            <Stack.Screen name="address-element" component={AddressElement} />
           </Stack.Navigator>
         </NavigationContainer>
     </View>

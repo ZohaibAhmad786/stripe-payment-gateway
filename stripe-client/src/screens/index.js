@@ -19,6 +19,18 @@ const RootScreen = ({navigation}) => {
       <TouchableOpacity style={styles.btnContainer} onPress={()=>navigation.navigate('card-element')}>
         <Text style={styles.text}>Card Element</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity style={styles.btnContainer} onPress={()=>navigation.navigate('custome-payment-element',{appearance:true})}>
+        <Text style={styles.text}>Appearance API</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.btnContainer} onPress={()=>navigation.navigate('address-element')}>
+        <Text style={styles.text}>Address Element</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.btnContainer} onPress={()=>{}}>
+        <Text style={styles.text}>Mobile Payment Element</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -30,7 +42,7 @@ const styles = StyleSheet.create({
         height:50,
         marginVertical:20,
         borderRadius:12,
-        backgroundColor:'green',
+        backgroundColor:'purple',
         justifyContent:'center',
         alignItems:'center',
     },

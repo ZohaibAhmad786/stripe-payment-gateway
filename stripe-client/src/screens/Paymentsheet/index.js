@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View, Platform } from 'react-native';
 import {
   useStripe,
   Address,
@@ -7,9 +7,39 @@ import {
 } from '@stripe/stripe-react-native';
 import PaymentScreen from '../../../components/PaymentScreen';
 import Button from '../../../components/Button';
-const API_URL="http://192.168.18.54:3000"
+const API_URL = "http://192.168.18.54:3000"
 
-export default function PaymentsUICustomScreen() {
+// The following code creates the appearance shown in the screenshot above
+const customAppearance = {
+ font: {
+  scale: 1.15,
+  //  family:
+  //    Platform.OS === 'android' ? 'avenirnextregular' : 'AvenirNext-Regular',
+ },
+ shapes: {
+   borderRadius: 12,
+   borderWidth: 0.5,
+ },
+ primaryButton: {
+   shapes: {
+    borderRadius: 20,
+   },
+ },
+ colors: {
+   primary: '#fcfdff',
+   background: '#ffffff',
+   componentBackground: '#f3f8fa',
+   componentBorder: '#f3f8fa',
+   componentDivider: '#000000',
+   primaryText: '#000000',
+   secondaryText: '#000000',
+   componentText: '#000000',
+   placeholderText: '#73757b',
+ },
+};
+
+export default function PaymentsUICustomScreen({ route }) {
+  const { appearance } = route.params || { appearance: false }
   const { initPaymentSheet, presentPaymentSheet, confirmPaymentSheetPayment } =
     useStripe();
   const [paymentSheetEnabled, setPaymentSheetEnabled] = useState(false);
@@ -61,6 +91,7 @@ export default function PaymentsUICustomScreen() {
         googlePay: { merchantCountryCode: 'US', testEnv: true },
         returnURL: 'stripe-example://stripe-redirect',
         defaultBillingDetails: billingDetails,
+        appearance: appearance?customAppearance:{},
       });
 
       if (!error) {
