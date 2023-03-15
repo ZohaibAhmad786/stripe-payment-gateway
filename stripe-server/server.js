@@ -1,9 +1,12 @@
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = require('stripe')('sk_test_51LIQo7ImE3PIl9xODuTTBz3GI2JN5njwrin8nW7pWnZfxQOSiBRdEmWiDFT90oZkUwm4U3NdMdyne0Pley2kLKUf00vt8C2CUQ');
 const express = require('express');
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config();
 const bodyParser = require('body-parser')
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
 
 // create application/json parser
 var jsonParser = bodyParser.json()
@@ -25,13 +28,12 @@ app.use(bodyParser.text({ type: 'text/html' }))
 
 
 app.get('/config', async (req, res) => {
-  console.log("Request triggered")
-
-  res.json({ publishableKey: "pk_test_51LIQo7ImE3PIl9xOLzYWEO4rBAO0381GC3BKBVB09G4yyDm9QaxANkluIhrg3PWk9nOZFGu3N6kJfpAFNqeoD5Rt00j8fMMxmd" });
+  console.log("FETCH_CONFIGURATION")
+  res.json({ publishableKey: process.env.STRIPE_PUBLISHABLE_KEY });
 });
 
 app.post('/create-payment-intent', jsonParser, async (req, res) => {
-  console.log("Request triggered", req.body)
+  console.log("PAYMENT-INTENT", req.body)
   const paymentIntent = await stripe.paymentIntents.create(req.body)
   
   const clientSecret = paymentIntent.client_secret
@@ -61,7 +63,7 @@ app.post('/payment-sheet', async (req, res) => {
     setupIntent: setupIntent.client_secret,
     ephemeralKey: ephemeralKey.secret,
     customer: customer.id,
-    publishableKey: 'pk_test_51LIQo7ImE3PIl9xOLzYWEO4rBAO0381GC3BKBVB09G4yyDm9QaxANkluIhrg3PWk9nOZFGu3N6kJfpAFNqeoD5Rt00j8fMMxmd'
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
   });
 });
 
@@ -84,7 +86,7 @@ app.post('/payment-sheet-ui', async (req, res) => {
     paymentIntent: paymentIntent.client_secret,
     ephemeralKey: ephemeralKey.secret,
     customer: customer.id,
-    publishableKey: 'pk_test_51LIQo7ImE3PIl9xOLzYWEO4rBAO0381GC3BKBVB09G4yyDm9QaxANkluIhrg3PWk9nOZFGu3N6kJfpAFNqeoD5Rt00j8fMMxmd'
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
   });
 });
 

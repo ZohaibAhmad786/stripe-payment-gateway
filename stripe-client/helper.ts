@@ -6,6 +6,7 @@ export async function fetchPublishableKey() {
     const response = await fetch(`${API_URL}/config`);
 
     const { publishableKey } = await response.json();
+    console.log({publishableKey})
     return publishableKey
   } catch (e) {
     console.warn('Unable to fetch publishable key. Is your server running?');

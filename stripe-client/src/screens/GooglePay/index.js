@@ -56,6 +56,23 @@ function GooglePaymentScreen() {
                 merchantName: 'Test',
                 merchantCountryCode: 'US',
             },
+            applePay: {
+                cartItems: [
+                    {
+                        label: 'Example item name',
+                        amount: '14.00',
+                        paymentType: PlatformPay.PaymentType.Immediate,
+                    },
+                    {
+                        label: 'Total',
+                        amount: '12.75',
+                        paymentType: PlatformPay.PaymentType.Immediate,
+                    },
+                ],
+                merchantCountryCode: 'US',
+                currencyCode: 'USD',
+            },
+
         });
 
         if (error) {
@@ -87,6 +104,26 @@ function GooglePaymentScreen() {
                         isRequired: true,
                     },
                 },
+                applePay: {
+                    cartItems: [
+                        {
+                            label: 'Example item name',
+                            amount: '14.00',
+                            paymentType: PlatformPay.PaymentType.Immediate,
+                        },
+                        {
+                            label: 'Total',
+                            amount: '12.75',
+                            paymentType: PlatformPay.PaymentType.Immediate,
+                        },
+                    ],
+                    merchantCountryCode: 'US',
+                    currencyCode: 'USD',
+                    requiredShippingAddressFields: [
+                        PlatformPay.ContactField.PostalAddress,
+                    ],
+                    requiredBillingContactFields: [PlatformPay.ContactField.PhoneNumber],
+                },
             }
         );
 
@@ -103,12 +140,17 @@ function GooglePaymentScreen() {
         </View>
     } else {
         return (
-            <StripeProvider publishableKey={publishingKey}>
-                <View >
+            <StripeProvider publishableKey={publishingKey}
+                merchantIdentifier="merchant.com.demostripe"
+            >
+                <View style={{padding:20}}>
                     <PlatformPayButton
-                        type={PlatformPay.ButtonType.Pay}
-                        onPress={pay}
-                        // onPress={createPaymentMethod}
+                        // type={PlatformPay.ButtonType.Pay}
+                        onPress={createPaymentMethod}
+                        // onPress={pay}
+                        type={PlatformPay.ButtonType.SetUp}
+                        appearance={PlatformPay.ButtonStyle.WhiteOutline}
+
                         style={{
                             width: '100%',
                             height: 50,

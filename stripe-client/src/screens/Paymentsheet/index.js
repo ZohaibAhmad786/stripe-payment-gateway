@@ -54,7 +54,11 @@ export default function PaymentsUICustomScreen({ route }) {
       },
     });
     const { paymentIntent, ephemeralKey, customer } = await response.json();
-
+console.log({
+  paymentIntent,
+  ephemeralKey,
+  customer,
+})
     return {
       paymentIntent,
       ephemeralKey,
@@ -140,7 +144,7 @@ export default function PaymentsUICustomScreen({ route }) {
   return (
     // In your app’s checkout, make a network request to the backend and initialize PaymentSheet.
     // To reduce loading time, make this request before the Checkout button is tapped, e.g. when the screen is loaded.
-    <PaymentScreen onInit={initialisePaymentSheet}>
+    <PaymentScreen onInit={()=>initialisePaymentSheet()}>
       <View>
         <Button
           variant="primary"

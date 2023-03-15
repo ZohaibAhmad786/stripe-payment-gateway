@@ -19,7 +19,7 @@ const PaymentScreen = ({
       if (publishableKey) {
         await initStripe({
           publishableKey: publishableKey,
-          merchantIdentifier: 'merchant.com.stripe.react.native',
+          merchantIdentifier: 'merchant.com.demostripe',
           urlScheme: 'stripe-example',
           setReturnUrlSchemeOnAndroid: true,
         });
