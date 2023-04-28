@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 const RootScreen = ({navigation}) => {
@@ -7,13 +7,13 @@ const RootScreen = ({navigation}) => {
 
     
   return (
-    <View style={{padding:20}}>
+    <View style={{padding:20, backgroundColor:'#3A3335',flex:1}}>
       <TouchableOpacity style={styles.btnContainer} onPress={()=>navigation.navigate('custome-payment-element')}>
         <Text style={styles.text}>Custome Payment Element</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.btnContainer} onPress={()=>navigation.navigate('google-pay')}>
-        <Text style={styles.text}>Google Pay</Text>
+        <Text style={styles.text}>{Platform.OS==='android'?"Google":"Apple"} Pay</Text>
       </TouchableOpacity>
     
       <TouchableOpacity style={styles.btnContainer} onPress={()=>navigation.navigate('card-element')}>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         height:50,
         marginVertical:20,
         borderRadius:12,
-        backgroundColor:'purple',
+        backgroundColor:'#F0544F',
         justifyContent:'center',
         alignItems:'center',
     },

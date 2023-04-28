@@ -47,7 +47,7 @@ const PaymentScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#3A3335",
     paddingTop: 20,
     paddingHorizontal: 16,
   },

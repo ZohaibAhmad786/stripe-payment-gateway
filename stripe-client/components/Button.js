@@ -57,7 +57,7 @@ export default  Button = ({
           borderRadius: 12,
   },
           primaryContainer: {
-            backgroundColor: "blue",
+            backgroundColor: "#F0544F",
           alignItems: 'center',
   },
           text: {

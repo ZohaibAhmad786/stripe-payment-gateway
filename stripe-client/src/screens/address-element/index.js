@@ -1,10 +1,9 @@
 import { AddressSheet, AddressSheetError, useStripe } from '@stripe/stripe-react-native';
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import Button from '../../../components/Button';
 import PaymentScreen from '../../../components/PaymentScreen';
-import { fetchPublishableKey } from '../../../helper';
-
+const API_URL = "http://192.168.18.54:3000"
 const AddressElement = () => {
   const [activityLoader, setLoading] = useState(true);
   const [publishableKey, setPublishableKey] = useState("");
@@ -125,11 +124,11 @@ const AddressElement = () => {
 
 
   // console.log({addressSheetVisible})
-  if (activityLoader) {
-    return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator />
-    </View>
-  } else {
+  // if (activityLoader) {
+  //   return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  //     <ActivityIndicator />
+  //   </View>
+  // } else {
     return <PaymentScreen onInit={()=>initialisePaymentSheet()}>
       <View style={{ padding: 20 }}>
         <Button
@@ -201,7 +200,7 @@ const AddressElement = () => {
         </View>
         <Button
           variant="primary"
-          onPress={() => handlePayPress()}
+          onPress={() => onPressBuy()}
           title="Pay"
           accessibilityLabel="Pay"
         // loading={loading}
@@ -209,7 +208,7 @@ const AddressElement = () => {
       </View>
     </PaymentScreen>
   }
-};
+// };
 
 export default AddressElement;
 

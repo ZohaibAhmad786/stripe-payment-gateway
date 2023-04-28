@@ -143,7 +143,7 @@ function GooglePaymentScreen() {
             <StripeProvider publishableKey={publishingKey}
                 merchantIdentifier="merchant.com.demostripe"
             >
-                <View style={{padding:20}}>
+                <View style={{padding:20,flex:1,backgroundColor:'#3A3335'}}>
                     <PlatformPayButton
                         // type={PlatformPay.ButtonType.Pay}
                         onPress={createPaymentMethod}
