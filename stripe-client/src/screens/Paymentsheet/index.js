@@ -7,7 +7,7 @@ import {
 } from '@stripe/stripe-react-native';
 import PaymentScreen from '../../../components/PaymentScreen';
 import Button from '../../../components/Button';
-const API_URL = "http://192.168.18.54:3000"
+const API_URL = "http://192.168.10.7:3000"
 
 // The following code creates the appearance shown in the screenshot above
 const customAppearance = {

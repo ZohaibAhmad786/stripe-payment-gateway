@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import Button from '../../../components/Button';
 import PaymentScreen from '../../../components/PaymentScreen';
-const API_URL = "http://192.168.18.54:3000"
+const API_URL = "http://192.168.10.7:3000"
 const AddressElement = () => {
-  const [activityLoader, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [publishableKey, setPublishableKey] = useState("");
   const [addressDetails, setAddressDetails] = useState({});
   const [addressSheetVisible, setAddressSheetVisible] = useState(false);
@@ -203,7 +203,7 @@ const AddressElement = () => {
           onPress={() => onPressBuy()}
           title="Pay"
           accessibilityLabel="Pay"
-        // loading={loading}
+        loading={loading}
         />
       </View>
     </PaymentScreen>

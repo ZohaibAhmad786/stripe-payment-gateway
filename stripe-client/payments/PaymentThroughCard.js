@@ -16,7 +16,7 @@ export default function PaymentThroughCard({publishableKey}) {
   console.log({cardInfo})
 
   const fetchPaymentIntentClientSecret = async () => {
-    const response = await fetch(`http://192.168.18.54:3000/create-payment-intent`, {
+    const response = await fetch(`http://192.168.10.7:3000/create-payment-intent`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

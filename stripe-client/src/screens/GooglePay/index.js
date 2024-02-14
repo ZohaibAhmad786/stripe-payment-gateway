@@ -17,7 +17,9 @@ function GooglePaymentScreen() {
             setLoading(true)
             const publishableKey = await fetchPublishableKey();
             setPublishingKey(publishableKey)
-            if (!(await isPlatformPaySupported({ googlePay: { testEnv: true } }))) {
+            const isSupported= await isPlatformPaySupported({ googlePay: { testEnv: true } })
+            console.log({isSupported})
+            if (!isSupported) {
                 Alert.alert('Google Pay is not supported.');
                 return;
             }
@@ -27,7 +29,7 @@ function GooglePaymentScreen() {
 
     const fetchPaymentIntentClientSecret = async () => {
         // Fetch payment intent created on the server, see above
-        const response = await fetch(`http://192.168.18.54:3000/create-payment-intent-google`, {
+        const response = await fetch(`http://192.168.10.7:3000/create-payment-intent-google`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,9 +38,9 @@ function GooglePaymentScreen() {
                 payment_method_types: ['card'],
                 amount: 12 * 278,
                 currency: 'usd',
-                metadata: {
-                    productId: "price_1LexnRImE3PIl9xOXL6tvx9z"
-                }
+                // metadata: {
+                //     productId: "price_1LexnRImE3PIl9xOXL6tvx9z"
+                // }
             }),
         });
         const { secret } = await response.json();
@@ -89,13 +91,13 @@ function GooglePaymentScreen() {
 
     const pay = async () => {
         const clientSecret = await fetchPaymentIntentClientSecret();
-
+console.log({clientSecret})
         const { error } = await confirmPlatformPayPayment(
             clientSecret,
             {
                 googlePay: {
                     testEnv: true,
-                    merchantName: 'My merchant name',
+                    merchantName: 'Zohaib Ahmad',
                     merchantCountryCode: 'US',
                     currencyCode: 'USD',
                     billingAddressConfig: {
@@ -104,26 +106,26 @@ function GooglePaymentScreen() {
                         isRequired: true,
                     },
                 },
-                applePay: {
-                    cartItems: [
-                        {
-                            label: 'Example item name',
-                            amount: '14.00',
-                            paymentType: PlatformPay.PaymentType.Immediate,
-                        },
-                        {
-                            label: 'Total',
-                            amount: '12.75',
-                            paymentType: PlatformPay.PaymentType.Immediate,
-                        },
-                    ],
-                    merchantCountryCode: 'US',
-                    currencyCode: 'USD',
-                    requiredShippingAddressFields: [
-                        PlatformPay.ContactField.PostalAddress,
-                    ],
-                    requiredBillingContactFields: [PlatformPay.ContactField.PhoneNumber],
-                },
+                // applePay: {
+                //     cartItems: [
+                //         {
+                //             label: 'Example item name',
+                //             amount: '14.00',
+                //             paymentType: PlatformPay.PaymentType.Immediate,
+                //         },
+                //         {
+                //             label: 'Total',
+                //             amount: '12.75',
+                //             paymentType: PlatformPay.PaymentType.Immediate,
+                //         },
+                //     ],
+                //     merchantCountryCode: 'US',
+                //     currencyCode: 'USD',
+                //     requiredShippingAddressFields: [
+                //         PlatformPay.ContactField.PostalAddress,
+                //     ],
+                //     requiredBillingContactFields: [PlatformPay.ContactField.PhoneNumber],
+                // },
             }
         );
 
@@ -140,14 +142,14 @@ function GooglePaymentScreen() {
         </View>
     } else {
         return (
-            <StripeProvider publishableKey={publishingKey}
-                merchantIdentifier="merchant.com.demostripe"
+            <StripeProvider publishableKey={"pk_test_51LIQo7ImE3PIl9xOLzYWEO4rBAO0381GC3BKBVB09G4yyDm9QaxANkluIhrg3PWk9nOZFGu3N6kJfpAFNqeoD5Rt00j8fMMxmd"}
+                // merchantIdentifier="merchant.com.demostripe"
             >
                 <View style={{padding:20,flex:1,backgroundColor:'#3A3335'}}>
                     <PlatformPayButton
                         // type={PlatformPay.ButtonType.Pay}
-                        onPress={createPaymentMethod}
-                        // onPress={pay}
+                        // onPress={createPaymentMethod}
+                        onPress={pay}
                         type={PlatformPay.ButtonType.SetUp}
                         appearance={PlatformPay.ButtonStyle.WhiteOutline}
 

@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const API_URL = "http://192.168.18.54:3000"
+const API_URL = "http://192.168.10.7:3000"
 
 export async function fetchPublishableKey() {
   try {
